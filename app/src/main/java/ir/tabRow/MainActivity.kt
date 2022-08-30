@@ -3,10 +3,12 @@ package ir.tabRow
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Home
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -65,17 +67,38 @@ class MainActivity : ComponentActivity() {
                                         pagerWidth = pagerWidth,
                                         totalItems = pagerList.size,
                                         selectedContent = {
-                                            Text(
-                                                text = "title $tab",
-                                                color = Color.White
-                                            )
+                                            Row(
+                                                modifier = Modifier.fillMaxSize(),
+                                                verticalAlignment = Alignment.CenterVertically,
+                                                horizontalArrangement = Arrangement.SpaceEvenly
+                                            ) {
+                                                Text(
+                                                    text = "title $tab",
+                                                    color = Color.White
+                                                )
+                                                Icon(
+                                                    imageVector = Icons.Rounded.Home,
+                                                    contentDescription = null,
+                                                    tint = Color.White
+                                                )
+                                            }
                                         },
                                         unselectedContent = { modifier ->
-                                            Text(
+                                            Row(
                                                 modifier = modifier,
-                                                text = "title $tab",
-                                                color = Color.Black
-                                            )
+                                                verticalAlignment = Alignment.CenterVertically,
+                                                horizontalArrangement = Arrangement.SpaceEvenly
+                                            ) {
+                                                Text(
+                                                    text = "title $tab",
+                                                    color = Color.Black
+                                                )
+                                                Icon(
+                                                    imageVector = Icons.Rounded.Home,
+                                                    contentDescription = null,
+                                                    tint = Color.Black
+                                                )
+                                            }
                                         }
                                     )
                             },

@@ -1,11 +1,14 @@
 package ir.ktab
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Surface
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,9 +54,14 @@ fun KTabItem(
     }
 
     Surface(
-        onClick = {
-            onTabClick(index)
-        },
+        modifier = Modifier
+            .clickable(
+                onClick = {
+                    onTabClick(index)
+                },
+                indication = rememberRipple(bounded = false),
+                interactionSource = MutableInteractionSource()
+            ),
         content = {
             Box(
                 modifier = Modifier
@@ -96,6 +104,7 @@ fun KTabItem(
                         else 0F
 
                     val unselectedContentModifier = Modifier
+                        .fillMaxSize()
                         .onGloballyPositioned {
                             clipableTextStartPosition = it.positionInParent().x
                             clipableTextEndPosition =
